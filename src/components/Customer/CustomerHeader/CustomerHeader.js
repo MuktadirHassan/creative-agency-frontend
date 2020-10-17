@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../../assets/images/logos/logo.png'
+import logo from '../../../assets/images/logos/logo.png';
+import {AuthContext} from '../../../authentication/AuthContext';
 const CustomerHeader = () => {
+    const { currentUser } = useContext(AuthContext);
     return (
         <div className="container navbar">
             <div className="navbar-brand">
@@ -11,7 +13,7 @@ const CustomerHeader = () => {
             </div>
             <ul className="ml-auto">
                 <div className="nav-item">
-                    Muktadir Hassan
+                    <img src={currentUser?.photoURL} className="rounded-circle mr-1" alt="" width="30px"/>{currentUser?.displayName}
                 </div>
             </ul>
         </div>

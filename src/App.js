@@ -9,27 +9,32 @@ import {
 import Login from './components/Login/Login';
 import Customer from './components/Customer/Customer';
 import Admin from './components/Admin/Admin';
+import { AuthProvider } from './authentication/AuthContext';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+require('dotenv').config();
 
 function App() {
   return (
-    <div className="App">
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            <Home></Home>
-          </Route>
-          <Route path="/login">
-            <Login></Login>
-          </Route>
-          <Route path="/customer">
-            <Customer></Customer>
-          </Route>
-          <Route path="/admin">
-            <Admin></Admin>
-          </Route>
-        </Switch>
-      </Router>
-    </div>
+    <AuthProvider>
+      <div className="App">
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <Home></Home>
+            </Route>
+            <Route path="/login">
+              <Login></Login>
+            </Route>
+            <PrivateRoute path="/customer">
+              <Customer></Customer>
+            </PrivateRoute>
+            <PrivateRoute path="/admin">
+              <Admin></Admin>
+            </PrivateRoute>
+          </Switch>
+        </Router>
+      </div>
+    </AuthProvider>
   );
 }
 

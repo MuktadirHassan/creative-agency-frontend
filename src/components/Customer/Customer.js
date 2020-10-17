@@ -25,6 +25,9 @@ const Customer = () => {
                         <Route path={`${path}/reviews`}>
                             <Review></Review>
                         </Route>
+                        <Route path={`${path}/order/:title`}>
+                            <Order></Order>
+                        </Route>
                         <Route path={`${path}`}>
                             <Order></Order>
                         </Route>
