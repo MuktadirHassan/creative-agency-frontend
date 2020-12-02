@@ -1,17 +1,14 @@
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
 import 'firebase/auth';
-
-import firebaseConfig from './firebaseConfig';
-// const app = firebase.initializeApp({
-//     apiKey: process.env.FIREBASE_API_KEY,
-//     authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-//     databaseURL: process.env.FIREBASE_DATABASE_URL,
-//     projectId: process.env.FIREBASE_PROJECT_ID,
-//     storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-//     messagingSenderId: process.env.FIREBASE_MESSAGING_ID,
-//     appId: process.env.FIREBASE_APPID,
-//     measurementId: process.env.FIREBASE_MEASUREMENT_ID
-// });
-
-const app = firebase.initializeApp(firebaseConfig);
-export default app;
+export const googleProvider = new firebase.auth.GoogleAuthProvider();
+export const app = firebase.initializeApp({
+    apiKey: "AIzaSyC-w2k-T72dajKBcrlQPWbaB27rtUfv7H4",
+    authDomain: "creative-agency-b2cf8.firebaseapp.com",
+    databaseURL: "https://creative-agency-b2cf8.firebaseio.com",
+    projectId: "creative-agency-b2cf8",
+    storageBucket: "creative-agency-b2cf8.appspot.com",
+    messagingSenderId: "526381683240",
+    appId: "1:526381683240:web:19b8617fb01ef6eac65b1d",
+    measurementId: "G-XWZW7DGTRK"
+  });
+export const auth = app.auth();

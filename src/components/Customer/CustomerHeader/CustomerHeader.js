@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/images/logos/logo.png';
-import {AuthContext} from '../../../authentication/AuthContext';
+import { useAuth } from '../../../authentication/AuthContext';
+
 const CustomerHeader = () => {
-    const { currentUser } = useContext(AuthContext);
+    const currentUser = useAuth();
     return (
         <div className="container navbar">
             <div className="navbar-brand">

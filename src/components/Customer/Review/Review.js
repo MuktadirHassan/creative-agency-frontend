@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { AuthContext } from '../../../authentication/AuthContext'
+import { AuthContext, useAuth } from '../../../authentication/AuthContext'
 
 const Review = () => {
     const {register, handleSubmit, errors, reset} = useForm();
-    const {currentUser} = useContext(AuthContext);
+    const currentUser = useAuth();
     const onSubmit = data => {
         const api = 'https://fast-depths-25443.herokuapp.com/addReview'
         fetch(api, {

@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
-import {AuthContext} from '../../../authentication/AuthContext';
+import {AuthContext, useAuth} from '../../../authentication/AuthContext';
 
 const Order = () => {
     const {register, handleSubmit, errors, reset} = useForm();
-    const {currentUser} = useContext(AuthContext);
+    const currentUser = useAuth();
 
     const { title } = useParams();
     

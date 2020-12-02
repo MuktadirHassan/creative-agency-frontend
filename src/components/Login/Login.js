@@ -1,37 +1,33 @@
-import React, { useContext, useEffect } from 'react';
-
-import * as firebase from 'firebase/app';
+import React, {useEffect} from 'react';
 
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import logo from '../../assets/images/logos/logo.png';
 import './Login.scss';
 import googleLogo from '../../assets/images/icons/google.png';
-import { AuthContext } from '../../authentication/AuthContext';
+import { auth, googleProvider } from '../../authentication/firebaseInit';
+import { useAuth } from '../../authentication/AuthContext';
+
+
 
 const Login = () => {
+    // Redirect if user alreay logged in
     const history = useHistory();
     const location = useLocation();
-    const {currentUser, setCurrentUser} = useContext(AuthContext);
     const {from} = location.state || {from:{pathname:'/'}};
-
-    const setToken = () => {
-        firebase.auth().currentUser.getIdToken(true)
-        .then((token) => sessionStorage.setItem('authToken', token))
-        .catch(error => console.log(error));
-    }
-
-    useEffect(()=>{
-        setToken();
-        history.replace(from);
-    },[currentUser])
-
-    const handleGoogleLogin = () => {
-        const provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithPopup(provider)
-        .then((result) => {
-            setCurrentUser(result);
-        })
-        .catch(error => console.log(error));
+    const currentUser = useAuth();
+    useEffect(() => {
+        if(currentUser) {
+            history.replace(from);
+        }
+    }, [currentUser])
+    
+    
+    const handleGoogleLogin = async () => {
+        try {
+            const result = await auth.signInWithPopup(googleProvider)
+        } catch (error) {
+            console.log(error)
+        }
     }
     return (
         <main>

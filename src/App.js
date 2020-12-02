@@ -11,7 +11,7 @@ import Customer from './components/Customer/Customer';
 import Admin from './components/Admin/Admin';
 import { AuthProvider } from './authentication/AuthContext';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
-require('dotenv').config();
+
 
 function App() {
   return (

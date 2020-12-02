@@ -1,34 +1,29 @@
-import React, { createContext, useEffect, useState } from 'react';
-import app from './firebaseInit';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { app, auth, googleProvider} from './firebaseInit';
 import { BoxLoading } from 'react-loadingg';
 
-export const AuthContext = createContext();
+
+const AuthContext = createContext();
+export function useAuth() {
+    return useContext(AuthContext);
+}
+const setUserToken = async () => {
+    const token = await app.auth().currentUser.getIdToken()
+    sessionStorage.setItem('authToken', token);
+}
 
 export const AuthProvider = ({children}) => {
-    const [currentUser, setCurrentUser] = useState(null);
-    const [pending, setPending] = useState(true);
-
-    const setToken = () => {
-        app.auth().currentUser.getIdToken(true)
-        .then((token) => sessionStorage.setItem('authToken', token || null))
-        .catch(error => console.log(error));
-    }
-    useEffect(() => {
-        app.auth().onAuthStateChanged((user) => {
-            setCurrentUser(user);
-            setPending(false);
-            setToken();
+    const [user, setUser] = useState()
+    useEffect(()=>{
+        const unsubscribe = auth.onAuthStateChanged(user => {
+            setUser(user);
+            setUserToken();
         });
+        return unsubscribe;
     },[])
-
-    if(pending){
-        return <>
-            <BoxLoading/>
-        </>
-    }
-
+    
     return (
-        <AuthContext.Provider value={{currentUser,setCurrentUser}}>
+        <AuthContext.Provider value={user}>
             {children}
         </AuthContext.Provider>
     );
