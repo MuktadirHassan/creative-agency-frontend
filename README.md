@@ -1,6 +1,9 @@
-# Creative Agency
+# Creative Agency - Frontend
 
 Creative agency is full-stack web application using MERN stack.
+This is the frontend part of the fullstack project using bootstrap and _create-react-app_
+
+>  [Creative Agency - Backend](https://github.com/MuktadirHassan/creative-agency-backend)
 
 ## Key Features
 - Protected routes only accessible to logged in users and admin
@@ -10,7 +13,11 @@ Creative agency is full-stack web application using MERN stack.
 
 ## Deployment:
 > Firebase Hosting
-### Installation
+
+
+
+## Getting started:
+Installation:
 
 ```bash
 git clone https://github.com/MuktadirHassan/creative-agency-frontend.git
@@ -29,5 +36,4 @@ npm start
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-Please make sure to update tests as appropriate.
 
